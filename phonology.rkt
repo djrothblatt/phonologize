@@ -3,14 +3,14 @@
 ;; but there's gonna be a lot of boilerplate
 ;; SOURCES OF BOILERPLATE:
 ;;   * To capture simple but general rules, we may need to write out lots of cases
-;;     SOLUTION: In another implementation, convert phonemes to bundles of features (structs)
+;;     SOLUTION: Convert phonemes to bundles of features (structs)
 
 ;; TO DO:
 ;; * figure out struct representation of phonemes
-;; * make struct representation of phonemes work in macros
 ;;   * fields of struct are distinctive features
+;; * make struct representation of phonemes work in pattern-matching macros
 
-;; no quoting necessary in 
+;; no quoting necessary: (rule (a) -> (b) / () self ())
 (define-syntax rule
   (syntax-rules (-> / self)
     [(_ (in ...) -> (out ...) / (lcontext ...) self (rcontext ...)) ; linguists recognize the notation: in becomes out in the context of lcontext _ rcontext
@@ -21,8 +21,8 @@
          [else phonemes]))]))
 
 
-(define-syntax-rule (define-rule name : in -> out / (lcontext ...) self (rcontext ...))
-  (define name (rule in -> out / (lcontext ...) self (rcontext ...))))
+(define-syntax-rule (define-rule name : (in) -> (out) / (lcontext ...) self (rcontext ...))
+  (define name (rule (in) -> (out) / (lcontext ...) self (rcontext ...))))
 
 (define apply-rule
   (λ (rule phonemes)
