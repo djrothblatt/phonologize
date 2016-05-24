@@ -61,5 +61,5 @@ solution is to translate ARPAbet to SAMPA, IPA, or some other, more
 complete phonetic alphabet, either when reading in the CMU Dictionary,
 or before, by transforming the text itself to such an alphabet. A
 function to do the former will be added to phonologize.rkt, and a
-script to do the latter will be added to the project folder, along
-with a translated version of cmu_dictionary_stressless.txt.
+script to do the latter has been added to the project folder, along
+with cmu_dict_stressless_sampa.txt, a translated version of cmu_dict_stressless.txt.
