@@ -54,6 +54,65 @@
 (define translate/bounded (translate #t))
 (define translate/unbounded (translate #f))
 
+;;;Translates the CMU Dictionary's ARPAbet transcription to SAMPA, the Speech Assessment Methods Phonetic Alphabet,
+;;;an ASCII-compliant phonetic alphabet
+(define *arpabet-sampa-alist*
+  '((ao O) ; begin pure vowels
+    (aa A)
+    (iy i)
+    (uw u)
+    (eh E)
+    (ih I)
+    (uh U)
+    (ah V)
+    (ax @)
+    (ae \{) ; end pure vowels
+    (ey ej) ; begin diphthongs
+    (ay Aj)
+    (ow oU)
+    (aw aU)
+    (oy Oj) ; end diphthongs
+    (er \@r\\)
+    (axr \@r\\)
+    (p p) ; begin stops
+    (b b)
+    (t t)
+    (d d)
+    (k k)
+    (g g) ; end stops
+    (ch tS) ; begin affricates
+    (jh dZ) ; end affricates
+    (f f) ; begin fricatives
+    (v v)
+    (th T)
+    (dh D)
+    (s s)
+    (z z)
+    (sh S)
+    (zh Z)
+    (hh h) ; end fricatives
+    (m m) ;begin nasals
+    (em m)
+    (n n)
+    (en n)
+    (ng N)
+    (eng N) ; end nasals
+    (l l) ; begin liquids
+    (el l)
+    (r r\\)
+    (dx 4) ; alveolar tap
+    (nx 4~) ; end liquids
+    (y j) ; begin semivowels/glides
+    (w w)
+    (q ?)))
+
+(define arpabet->sampa
+  (λ (phonemes)
+    (map (λ (p) (if (assq p *arpabet-sampa-alist*)
+                    (cadr (assq p *arpabet-sampa-alist*))
+                    p))
+         phonemes)))
+
 ;; turns a line of input into a list of symbols
 ;; ARPAbet uses spaces to separate phonemes, so this will break a line up into a list of phonemes with their word at the front
 ;; (in other words, this will turn a line into a cell of an association list)
