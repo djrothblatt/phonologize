@@ -15,8 +15,8 @@ as pattern-matching functions on symbols. We generate arbitrary
 pattern-matching functions using the _rule_ macro.
 Currently Phonologize reads in the CMU Dictionary to have access to a
 large corpus of words in transcription. (Since this is the CMU
-Dictionary, the transcription is ARPAbet, though any transcription
-will do.)
+Dictionary, the original transcription is ARPAbet, though any transcription
+will do. A SAMPA transcription is also available.)
 
 ## Purpose
 phonologize.rkt is useful in testing a list of phonological rules
@@ -52,14 +52,3 @@ times to capture its specific cases. This makes our grammar more
 space-intensive, more complicated, and much harder to understand.
 The solution is to implement phonemes as bundles of features--structs!
 I (Daniel Rothblatt) am working on this solution now.
-
-2. ARPAbet is an extremely flawed phonetic alphabet. First of all, it
-only represents the phonemes of one language, English. Second, it only
-represents *phonemes*, which is problematic if one wishes to do
-phonology with a system that can capture precise phonetic details. The
-solution is to translate ARPAbet to SAMPA, IPA, or some other, more
-complete phonetic alphabet, either when reading in the CMU Dictionary,
-or before, by transforming the text itself to such an alphabet. A
-function to do the former will be added to phonologize.rkt, and a
-script to do the latter has been added to the project folder, along
-with cmu_dict_stressless_sampa.txt, a translated version of cmu_dict_stressless.txt.
